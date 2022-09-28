@@ -1,3 +1,4 @@
+let search_dict = {};
 let amenity_dict = {};
 
 // Check API status 
@@ -33,11 +34,12 @@ function checkApiStatus(data, status) {
 
 function placePostRequest() {
   const search_url = 'http://0.0.0.0:5001/api/v1/places_search';
-  const newData = JSON.stringify({});
+  search_dict["amenities"] = Object.keys(amenity_dict);
+  const data = JSON.stringify(search_dict);
   $.ajax({
     type: "POST",
     url: search_url,
-    data: newData,
+    data: data,
     headers: {
       "Content-Type": "application/json"
     },
@@ -65,5 +67,6 @@ function placeUpdate(data, status) {
       </article>`
     )
   }
+  console.log(amenity_dict);
 }
 
